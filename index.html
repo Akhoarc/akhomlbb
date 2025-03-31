@@ -16,42 +16,69 @@
         
         <label for="serverId" class="block font-semibold mt-4">Server ID:</label>
         <input type="text" id="serverId" class="w-full p-3 border rounded mt-1 text-black" placeholder="Enter your Server ID">
+        
+        <button onclick="checkUsername()" class="w-full bg-blue-500 text-white p-2 rounded mt-4 hover:bg-blue-600">Check Username</button>
+        <p id="usernameDisplay" class="text-center mt-2 text-yellow-400 hidden">Player Name: <span id="playerName">Fetching...</span></p>
     </div>
 
-    <h3 class="text-xl font-semibold mt-6 text-yellow-400">💰 BEST PRICES – FAST & SECURE DELIVERY 💰</h3>
+    <h3 class="text-xl font-semibold mt-6 text-yellow-400">Select a Diamond Pack:</h3>
     <div class="bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-        <p class="mt-2 text-lg font-semibold">🎯 DIAMOND PRICING:</p>
-        <ul class="mt-2 grid grid-cols-2 gap-4">
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 5💎 = ₹9</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 11💎 = ₹15</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 22💎 = ₹30</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 56💎 = ₹75</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 86💎 = ₹110</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 112💎 = ₹150</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 168💎 = ₹225</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 343💎 = ₹410</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 514💎 = ₹610</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 600💎 = ₹700 (🔥 VFM 🔥)</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 706💎 = ₹810</li>
-            <li class="bg-gray-700 p-3 rounded text-center">✅ 1049💎 = ₹1240</li>
-        </ul>
+        <select id="diamondPack" class="w-full p-3 border rounded text-black">
+            <option value="">Select a pack</option>
+            <option value="9">5💎 = ₹9</option>
+            <option value="15">11💎 = ₹15</option>
+            <option value="30">22💎 = ₹30</option>
+            <option value="75">56💎 = ₹75</option>
+            <option value="110">86💎 = ₹110</option>
+            <option value="150">112💎 = ₹150</option>
+            <option value="225">168💎 = ₹225</option>
+            <option value="410">343💎 = ₹410</option>
+            <option value="610">514💎 = ₹610</option>
+            <option value="700">600💎 = ₹700</option>
+            <option value="810">706💎 = ₹810</option>
+            <option value="1240">1049💎 = ₹1240</option>
+        </select>
     </div>
 
-    <div class="bg-gray-800 p-4 rounded-lg shadow-md mt-4">
-        <p class="mt-2 text-lg font-semibold">🎟️ PASSES & BUNDLES:</p>
-        <ul class="grid grid-cols-2 gap-4">
-            <li class="bg-gray-700 p-3 rounded text-center">🎫 TWILIGHT PASS = ₹680</li>
-            <li class="bg-gray-700 p-3 rounded text-center">🎫 WEEKLY PASS = ₹130</li>
-            <li class="bg-gray-700 p-3 rounded text-center">🎫 WEEKLY PASS + 86💎 = ₹230</li>
-            <li class="bg-gray-700 p-3 rounded text-center">🎫 3X WEEKLY PASS = ₹390</li>
-            <li class="bg-gray-700 p-3 rounded text-center">🎫 5X WEEKLY PASS = ₹650</li>
-        </ul>
-    </div>
-
-    <button id="purchaseButton" class="w-full bg-yellow-500 text-black font-bold p-3 rounded mt-6 hover:bg-yellow-600 transition duration-300 shadow-md">
+    <button id="purchaseButton" onclick="processPurchase()" class="w-full bg-yellow-500 text-black font-bold p-3 rounded mt-6 hover:bg-yellow-600 transition duration-300 shadow-md" disabled>
         Purchase Diamonds
     </button>
 </div>
+
+<script>
+    function checkUsername() {
+        let userId = document.getElementById("userId").value;
+        let serverId = document.getElementById("serverId").value;
+        let usernameDisplay = document.getElementById("usernameDisplay");
+        let playerName = document.getElementById("playerName");
+        
+        if (userId && serverId) {
+            // Simulating API response (Replace with actual API call)
+            setTimeout(() => {
+                let fetchedName = "Player123"; // Replace with actual fetched username
+                playerName.textContent = fetchedName;
+                usernameDisplay.classList.remove("hidden");
+                document.getElementById("purchaseButton").disabled = false;
+            }, 2000);
+        } else {
+            alert("Please enter User ID and Server ID first.");
+        }
+    }
+
+    function processPurchase() {
+        let userId = document.getElementById("userId").value;
+        let serverId = document.getElementById("serverId").value;
+        let selectedPack = document.getElementById("diamondPack").value;
+        
+        if (!selectedPack) {
+            alert("Please select a diamond pack before proceeding.");
+            return;
+        }
+
+        alert(`Processing purchase for User ID: ${userId}, Server ID: ${serverId}, Pack Price: ₹${selectedPack}`);
+        // Implement API call for purchase here
+    }
+</script>
 
 </body>
 </html>
